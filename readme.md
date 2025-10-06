@@ -1,4 +1,3 @@
-```markdown
 # AcademIQ: Group 2 - Zindua Hackathon (Oct 2025)
 
 ## Project Overview
@@ -103,6 +102,4 @@ Then, everyone can update their local copy:
 ```bash
 git checkout main
 git pull origin main
-```
-
 ```
