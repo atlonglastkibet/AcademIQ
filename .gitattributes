@@ -1,1 +1,2 @@
 datascience/student_transport_logs.csv filter=lfs diff=lfs merge=lfs -text
+datascience/*.csv filter=lfs diff=lfs merge=lfs -text
