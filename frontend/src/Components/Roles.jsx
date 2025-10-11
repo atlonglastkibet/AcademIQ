@@ -8,7 +8,7 @@ function Roles() {
   const [roles, setRoles] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Default roles in case database is empty
+  
   const defaultRoles = ["student", "parent", "teacher", "admin", "driver"];
 
   useEffect(() => {
@@ -22,21 +22,21 @@ function Roles() {
           .not("role", "is", null);
 
         if (error) {
-          console.error("❌ Supabase error:", error);
-          // Use default roles if there's an error
+          console.error("Supabase error:", error);
+          
           setRoles(defaultRoles);
           return;
         }
 
-        console.log("✅ Raw roles data:", data);
+        console.log("Raw roles data:", data);
 
         if (!data || data.length === 0) {
-          console.log("📝 No roles found in database, using defaults");
+          console.log("No roles found in database, using defaults");
           setRoles(defaultRoles);
         } else {
-          // Extract unique roles and filter out null/undefined
+          
           const uniqueRoles = [...new Set(data.map((u) => u.role).filter(Boolean))];
-          console.log("🎯 Unique roles:", uniqueRoles);
+          console.log("Unique roles:", uniqueRoles);
           
           if (uniqueRoles.length === 0) {
             setRoles(defaultRoles);
@@ -45,8 +45,8 @@ function Roles() {
           }
         }
       } catch (err) {
-        console.error("❌ Error fetching roles:", err);
-        // Fallback to default roles
+        console.error("Error fetching roles:", err);
+        
         setRoles(defaultRoles);
       } finally {
         setLoading(false);

@@ -22,9 +22,9 @@ const RegLog = () => {
   });
   const navigate = useNavigate();
 
-  // ✅ Firebase Login
+  
   const handleLoginSubmit = async () => {
-    // Clean and validate
+    
     const email = loginData.email?.trim();
     const password = loginData.password;
     
@@ -32,7 +32,7 @@ const RegLog = () => {
     console.log("Email:", email);
     console.log("Password length:", password?.length);
 
-    // Validate inputs
+    
     if (!email || !password) {
       alert("Please enter both email and password");
       return;
@@ -43,7 +43,7 @@ const RegLog = () => {
       return;
     }
 
-    // Simple email validation
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       alert("Please enter a valid email address");
@@ -105,7 +105,7 @@ const RegLog = () => {
     }
   };
 
-  // ✅ Firebase Signup
+ 
   const handleSignupSubmit = async () => {
     if (!acceptTerms) {
       alert("Please accept Terms of Service");
@@ -135,7 +135,7 @@ const RegLog = () => {
       return;
     }
 
-    // Email validation
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       alert("Please enter a valid email address");
@@ -151,25 +151,25 @@ const RegLog = () => {
       
       console.log("Firebase auth user created:", user.uid);
 
-      // 2. Get role from URL parameter or default to student
+      
       const urlParams = new URLSearchParams(window.location.search);
       const role = urlParams.get('role') || 'student';
 
-      // 3. Create user document in Firestore with the correct role
+     
       await setDoc(doc(db, "users", user.uid), {
         user_id: user.uid,
         first_name: firstName,
         last_name: lastName,
         full_name: `${firstName} ${lastName}`,
         email: email,
-        role: role, // Use the role from URL parameter
+        role: role, 
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       });
 
       console.log("Firestore user document created with role:", role);
 
-      // 4. Also create a student document if role is student
+      
       if (role === "student") {
         try {
           await setDoc(doc(db, "students", user.uid), {
@@ -219,7 +219,7 @@ const RegLog = () => {
     }
   };
 
-  // ✅ Handlers for input fields
+ 
   const handleLoginChange = (e) => setLoginData({ ...loginData, [e.target.name]: e.target.value });
   const handleSignupChange = (e) => setSignupData({ ...signupData, [e.target.name]: e.target.value });
 
@@ -244,23 +244,23 @@ const RegLog = () => {
           </button>
         </div>
 
-        {/* Branding */}
+       
         <div className="text-center p-2">
           <h1 className="text-4xl font-bold text-black mb-2">AcademIQ</h1>
           <p className="text-black">Smart learning for bright futures.</p>
         </div>
 
-        {/* Modal */}
+        
         <div className="flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full relative overflow-hidden flex">
-            {/* Left Image */}
+           
             <div className="hidden md:block w-1/2 relative">
               <img src={regi1} alt="Registration visual" className="h-full w-full object-cover" />
             </div>
 
-            {/* Right Section */}
+           
             <div className="w-full md:w-1/2 relative flex flex-col">
-              {/* Close Button */}
+              
               <button 
                 onClick={() => setIsModalOpen(false)}
                 className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-100 transition-colors z-10"
@@ -295,9 +295,9 @@ const RegLog = () => {
               {/* Form Area */}
               <div className="p-8 overflow-y-auto max-h-[90vh]">
                 {activeTab === "login" ? (
-                  // ✅ Login Form
+                  
                   <div className="space-y-6">
-                    {/* Email */}
+                    
                     <div>
                       <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden focus-within:border-green-600 transition-colors">
                         <div className="bg-gray-100 px-4 py-3 border-r border-gray-300">
@@ -314,7 +314,7 @@ const RegLog = () => {
                       </div>
                     </div>
 
-                    {/* Password */}
+                    
                     <div>
                       <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden focus-within:border-green-600 transition-colors">
                         <div className="bg-gray-100 px-4 py-3 border-r border-gray-300">
@@ -352,7 +352,7 @@ const RegLog = () => {
                 ) : (
                   // Signup Form
                   <div className="space-y-5">
-                    {/* Email */}
+                    
                     <div>
                       <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden focus-within:border-green-600 transition-colors">
                         <div className="bg-gray-100 px-4 py-3 border-r border-gray-300">

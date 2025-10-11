@@ -8,8 +8,8 @@ import {
     Receipt, Shield, HelpCircle, Bookmark
 } from 'lucide-react';
 import Footer from './Footer';
-import { auth } from '../firebase'; // Add Firebase auth import
-import { useNavigate } from 'react-router-dom'; // Add navigation
+import { auth } from '../firebase'; 
+import { useNavigate } from 'react-router-dom'; 
 
 const THEME_COLORS = {
   DEEP_FOREST: "#04736f",
@@ -987,7 +987,7 @@ const ParentDashboard = () => {
     const [currentUser, setCurrentUser] = useState(null);
     const navigate = useNavigate();
 
-    // Get current user from Firebase auth
+    
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             if (user) {
@@ -1119,7 +1119,7 @@ const ParentDashboard = () => {
                     "--color-sidebar-hover": THEME_COLORS.SIDEBAR_HOVER,
                 }}
             >
-                {/* Desktop Sidebar */}
+               
                 <div className="hidden lg:block w-80 transition-all duration-300">
                     <Sidebar 
                         activeTab={activeTab} 
@@ -1130,7 +1130,7 @@ const ParentDashboard = () => {
                     />
                 </div>
 
-                {/* Mobile Sidebar Overlay */}
+                
                 {isSidebarOpen && (
                     <div 
                         className="fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 lg:hidden"
@@ -1138,7 +1138,7 @@ const ParentDashboard = () => {
                     ></div>
                 )}
 
-                {/* Mobile Sidebar */}
+                
                 <div 
                     className={`fixed inset-y-0 left-0 z-50 transform transition-transform duration-300 ease-in-out lg:hidden 
                         ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`

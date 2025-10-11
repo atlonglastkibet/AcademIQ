@@ -146,16 +146,16 @@ const Landing = () => {
   {/* First line */}
   <div style={{ fontSize: "3rem", fontWeight: "bold" }}>Learn, Grow</div>
 
-  {/* Excel with three horizontal lines to its left */}
+  
   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-    {/* Three horizontal lines */}
+    
     <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", height: 30 , fontWeight: "bold" }}>
       <div style={{ width: 40, height: 3, backgroundColor: "#fff" }}></div>
       <div style={{ width: 50, height: 3, backgroundColor: "#fff" }}></div>
       <div style={{ width: 60, height: 3, backgroundColor: "#fff" }}></div>
     </div>
 
-    {/* Excel text */}
+    
     <div style={{ fontSize: "5rem", fontWeight: "bold" }}>Excel</div>
   </div>
 </div>

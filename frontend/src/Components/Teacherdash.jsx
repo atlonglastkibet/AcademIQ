@@ -17,14 +17,14 @@ const Teacherdash = () => {
   const [activeSection, setActiveSection] = useState("dashboard");
 
 
-  // ✅ Calendar state (clean and correct)
+  
 const [selectedDate, setSelectedDate] = useState(new Date());
 const [events, setEvents] = useState([
   { date: new Date(), title: "" },
 ]);
 const [newEvent, setNewEvent] = useState("");
 
-// ✅ Function to add new event
+
 const handleAddEvent = () => {
   if (newEvent.trim() === "") return;
   setEvents([...events, { date: selectedDate, title: newEvent }]);

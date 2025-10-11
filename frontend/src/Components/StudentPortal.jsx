@@ -1,4 +1,4 @@
-// src/Components/StudentPortal.jsx
+
 import React, { useState, useEffect } from "react";
 import {
   Bell,
@@ -74,7 +74,7 @@ const getWelcomeMessage = (academicStatus, riskScore) => {
 
 // Firebase Data Service
 class FirebaseDataService {
-  // Get student profile from Firestore
+
   static async getStudentProfile(userId) {
     try {
       console.log('👤 Fetching student profile from Firebase for user:', userId);
@@ -101,7 +101,7 @@ class FirebaseDataService {
     try {
       console.log('📊 Fetching academic data from Firebase for user:', userId);
       
-      // Try to get from students collection first
+      
       const studentsQuery = query(
         collection(db, "students"),
         where("user_id", "==", userId)
@@ -136,7 +136,7 @@ class FirebaseDataService {
     try {
       console.log('🎓 Fetching student results from Firebase for user:', userId);
       
-      // Get student ID first
+      
       const studentsQuery = query(
         collection(db, "students"),
         where("user_id", "==", userId)
@@ -144,7 +144,7 @@ class FirebaseDataService {
       const studentSnapshot = await getDocs(studentsQuery);
       
       if (studentSnapshot.empty) {
-        console.log('❌ No student record found');
+        console.log(' No student record found');
         return [];
       }
 
@@ -181,10 +181,10 @@ class FirebaseDataService {
         ...doc.data()
       }));
 
-      console.log('✅ Firebase subjects data:', subjects);
+      console.log('Firebase subjects data:', subjects);
       return subjects;
     } catch (error) {
-      console.error('❌ Error fetching subjects from Firebase:', error);
+      console.error('Error fetching subjects from Firebase:', error);
       return [];
     }
   }
@@ -194,7 +194,7 @@ class FirebaseDataService {
     try {
       console.log('📅 Fetching attendance from Firebase for user:', userId);
       
-      // Get student ID first
+     
       const studentsQuery = query(
         collection(db, "students"),
         where("user_id", "==", userId)
@@ -233,7 +233,7 @@ class FirebaseDataService {
     try {
       console.log('🔮 Fetching predictions from Firebase for user:', userId);
       
-      // Get student ID first
+      
       const studentsQuery = query(
         collection(db, "students"),
         where("user_id", "==", userId)
@@ -255,7 +255,7 @@ class FirebaseDataService {
       const predictionsSnapshot = await getDocs(predictionsQuery);
       
       if (predictionsSnapshot.empty) {
-        console.log('❌ No predictions found');
+        console.log('No predictions found');
         return null;
       }
 
@@ -263,7 +263,7 @@ class FirebaseDataService {
       console.log('✅ Firebase predictions data:', predictions);
       return predictions;
     } catch (error) {
-      console.error('❌ Error fetching predictions from Firebase:', error);
+      console.error('Error fetching predictions from Firebase:', error);
       return null;
     }
   }
@@ -291,7 +291,7 @@ class FirebaseDataService {
       if (!studentSnapshot.empty) {
         const studentId = studentSnapshot.docs[0].id;
         
-        // Check results
+        
         const resultsQuery = query(
           collection(db, "student_results"),
           where("student_id", "==", studentId)
@@ -299,7 +299,7 @@ class FirebaseDataService {
         const resultsSnapshot = await getDocs(resultsQuery);
         console.log('📊 Firebase results data:', resultsSnapshot.docs.map(doc => doc.data()));
         
-        // Check attendance
+        
         const attendanceQuery = query(
           collection(db, "class_attendance"),
           where("student_id", "==", studentId)
@@ -307,33 +307,33 @@ class FirebaseDataService {
         const attendanceSnapshot = await getDocs(attendanceQuery);
         console.log('📅 Firebase attendance data:', attendanceSnapshot.docs.map(doc => doc.data()));
         
-        // Check predictions
+        
         const predictionsQuery = query(
           collection(db, "unified_predictions"),
           where("student_id", "==", studentId)
         );
         const predictionsSnapshot = await getDocs(predictionsQuery);
-        console.log('🔮 Firebase predictions data:', !predictionsSnapshot.empty ? predictionsSnapshot.docs[0].data() : 'No predictions');
+        console.log('Firebase predictions data:', !predictionsSnapshot.empty ? predictionsSnapshot.docs[0].data() : 'No predictions');
       }
 
       // Check subjects
       const subjectsSnapshot = await getDocs(collection(db, "subjects"));
-      console.log('📚 Firebase subjects data:', subjectsSnapshot.docs.map(doc => doc.data()));
+      console.log('Firebase subjects data:', subjectsSnapshot.docs.map(doc => doc.data()));
 
     } catch (error) {
-      console.error('❌ Firebase debug error:', error);
+      console.error('Firebase debug error:', error);
     }
   }
 
   // Get complete student data
   static async getCompleteStudentData(userId) {
     try {
-      console.log('🎯 Fetching COMPLETE student data from Firebase for user:', userId);
+      console.log('Fetching COMPLETE student data from Firebase for user:', userId);
       
-      // First, debug to see what data exists
+      
       await this.debugUserData(userId);
       
-      // Fetch all data in parallel
+      
       const [
         profileData,
         academicData,
@@ -359,11 +359,11 @@ class FirebaseDataService {
         predictions: predictionsData
       };
 
-      console.log('✅ COMPLETE FIREBASE STUDENT DATA STRUCTURE:', completeData);
+      console.log(' COMPLETE FIREBASE STUDENT DATA STRUCTURE:', completeData);
       return completeData;
 
     } catch (error) {
-      console.error('❌ Error fetching complete student data from Firebase:', error);
+      console.error(' Error fetching complete student data from Firebase:', error);
       return null;
     }
   }
@@ -1044,7 +1044,7 @@ const RevisionToolsView = ({ revisionData }) => {
     setLoading(true);
     setSelectedTopic({ topic, subject });
     
-    // Simulate API call with fallback data
+    
     setTimeout(() => {
       const videos = getKhanAcademyFallback(topic, subject);
       setKhanAcademyVideos(videos);
@@ -1527,7 +1527,7 @@ const ReportIssueView = () => {
         reportData.userEmail = auth.currentUser.email;
       }
 
-      // Use Firebase instead of Supabase
+      
       await addDoc(collection(db, "reports"), reportData);
 
       setSubmitSuccess(true);
@@ -1705,9 +1705,9 @@ function StudentPortal() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   useEffect(() => {
-    // Use Firebase authentication
+    
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      console.log('🔥 Firebase auth state changed:', currentUser?.uid);
+      console.log('Firebase auth state changed:', currentUser?.uid);
       setUser(currentUser);
 
       if (currentUser) {
@@ -1724,7 +1724,7 @@ function StudentPortal() {
     try {
       console.log('🔄 Starting data fetch for Firebase user:', userId);
       
-      // Fetch from Firebase
+      
       const completeData = await FirebaseDataService.getCompleteStudentData(userId);
       
       if (completeData) {
@@ -1855,7 +1855,7 @@ function StudentPortal() {
       };
     });
 
-    // If no subjects processed, use fallback
+    
     if (academicSubjects.length === 0) {
       return getFallbackAcademicData();
     }
@@ -1874,7 +1874,7 @@ function StudentPortal() {
   const processRevisionData = (results, predictions, academicData) => {
     const recommendations = [];
 
-    // Add recommendations based on low grades from academic data
+    
     if (academicData && academicData.subjects) {
       academicData.subjects.forEach(subject => {
         if (subject.currentGrade < 70) {
@@ -1889,7 +1889,7 @@ function StudentPortal() {
       });
     }
 
-    // Add recommendations based on results data
+    
     if (results && results.length > 0) {
       const recentLowResults = results
         .filter(result => result.marks < 70)
@@ -1906,7 +1906,7 @@ function StudentPortal() {
       });
     }
 
-    // Add recommendations based on predictions
+    
     if (predictions && predictions.dropout_risk > 0.5) {
       recommendations.push({
         subject: "Overall Performance",
@@ -1917,7 +1917,7 @@ function StudentPortal() {
       });
     }
 
-    // If no specific recommendations, add general ones
+    
     if (recommendations.length === 0) {
       recommendations.push(
         {
@@ -1933,7 +1933,7 @@ function StudentPortal() {
     return { recommendations };
   };
 
-  // Fallback data functions
+  
   const getFallbackStudentData = (userId) => {
     const userEmail = auth.currentUser?.email || "";
     const userName = auth.currentUser?.displayName || userEmail.split('@')[0] || "Student";
@@ -1963,7 +1963,7 @@ function StudentPortal() {
   });
 
   const getFallbackRevisionData = (academicData) => {
-    // Use actual academic data to generate relevant recommendations
+    
     const lowPerformingSubjects = academicData?.subjects?.filter(subject => subject.currentGrade < 70) || [];
     
     const recommendations = lowPerformingSubjects.map(subject => ({
@@ -1974,7 +1974,7 @@ function StudentPortal() {
       resources: 3
     }));
 
-    // Add general recommendations if no low-performing subjects
+    
     if (recommendations.length === 0) {
       recommendations.push(
         {
@@ -2154,7 +2154,7 @@ function StudentPortal() {
           "--color-sidebar-hover": THEME_COLORS.SIDEBAR_HOVER,
         }}
       >
-        {/* Sidebar */}
+        
         <div
           className={`text-white transition-all duration-300 ${
             sidebarOpen ? "w-80" : "w-20"
@@ -2164,7 +2164,7 @@ function StudentPortal() {
             background: `linear-gradient(180deg, ${THEME_COLORS.DEEP_FOREST} 0%, ${THEME_COLORS.SIDEBAR_HOVER} 100%)`,
           }}
         >
-          {/* Logo/Brand */}
+          
           <div
             className={`p-6 flex items-center justify-between border-b border-white/10`}
           >
@@ -2211,7 +2211,7 @@ function StudentPortal() {
             </div>
           </div>
 
-          {/* Navigation Menu */}
+          
           <nav className="flex-1 p-4">
             <ul className="space-y-2">
               {menuItems.map((item) => {
@@ -2239,7 +2239,7 @@ function StudentPortal() {
             </ul>
           </nav>
 
-          {/* Bottom Menu */}
+          
           <div className={`p-4 border-t border-white/10 space-y-2`}>
             <button 
               onClick={() => auth.signOut()}
@@ -2251,7 +2251,7 @@ function StudentPortal() {
           </div>
         </div>
 
-        {/* Main Content */}
+        
         <div className="flex-1 flex flex-col overflow-hidden">
           {studentData && (
             <Header

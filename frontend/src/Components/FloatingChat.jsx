@@ -79,7 +79,7 @@ function FloatingChat() {
   };
 
   const clearChat = () => {
-    setMessages([{ role: "assistant", content: "👋 Hi! I'm your AcademIQ Assistant. What subject are you studying today?" }]);
+    setMessages([{ role: "assistant", content: " Hi! I'm your AcademIQ Assistant. What subject are you studying today?" }]);
   };
 
   return (
